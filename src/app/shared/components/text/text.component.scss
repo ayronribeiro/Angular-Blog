@@ -1,0 +1,12 @@
+:host{
+    display: block;
+    overflow: hidden;
+
+    p{
+        -webkit-line-clamp: inherit;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;  
+        overflow: hidden;
+        line-height: inherit;
+    }
+}

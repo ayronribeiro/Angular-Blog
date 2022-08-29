@@ -1,0 +1,25 @@
+<div class="post">
+  <img class="postimage" [src]="postExtras.url"/>
+  <div class="author-date">
+    <span class="date">{{ post.attributes.date | date: "dd MMMM YYYY" }}</span>
+    <h1 class="author">{{ post.attributes.Author }}</h1>
+  </div>
+  <div class="tags">
+    <div class="tag" *ngFor="let tag of postExtras.tags">
+      {{ tag.attributes.title }}
+    </div>
+  </div>
+  <div class="title" *ngIf="!!post">
+    {{ post.attributes.title }}
+  </div>
+  <div class="description">
+    <h1>{{ post.attributes.description }}</h1>
+  </div>
+
+  <section>
+    <div class="example-button-row">
+      <button mat-flat-button routerLink="/news">Previous</button>
+    </div>
+  </section>
+
+</div>

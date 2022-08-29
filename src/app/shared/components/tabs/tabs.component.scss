@@ -1,0 +1,76 @@
+:host {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+  .container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: calc(100% + calc(var(--size) / 4));
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    margin-top: calc(calc(var(--size) / 4) * -1);
+
+    header {
+      width: 100%;
+      position: relative;
+      z-index: 2;
+
+      .buttons {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        a {
+          flex: 1;
+          width: 100%;
+          font-size: calc(var(--size) / 7);
+          color: var(--color-3);
+          text-align: center;
+          padding: calc(var(--size) / 4) 0 calc(var(--size) / 7.5) 0;
+
+          &.active {
+            color: var(--color-1);
+          }
+        }
+      }
+    }
+
+    .content {
+      flex: 1;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+
+    }
+
+    footer {
+      width: 100%;
+    }
+  }
+
+  .bar {
+    height: 3px;
+    width: 100%;
+    position: relative;
+    background: var(--color-3);
+    box-shadow: 0 1px 1px 0px rgba(0, 0, 0, 0.1);
+
+    .thumb {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      background-color: var(--color-1);
+      transition: transform var(--animation-speed) ease-out 0ms;
+    }
+  }
+}

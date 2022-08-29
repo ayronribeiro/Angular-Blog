@@ -1,0 +1,21 @@
+<div class="posts">
+  <div (click)="routeToPost(post)" class="post" *ngFor="let post of posts">
+    <div
+      class="image"
+      [ngStyle]="{
+        'background-image':
+          'url(' + getUrl(post.attributes.image.data.attributes.url) + ')'
+      }"
+    ></div>
+    <div class="description">
+      <h1>{{ post.attributes.title }}</h1>
+      <div class="tags">
+        <div class="tag" *ngFor="let tag of post.attributes.tags.data">
+          {{ tag.attributes.title }}
+        </div>
+      </div>
+      <div class="text">{{ post.attributes.description }}</div>
+      <span>{{ post.attributes.date | date: "dd/MM/YYYY" }}</span>
+    </div>
+  </div>
+</div>

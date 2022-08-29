@@ -1,0 +1,27 @@
+:host {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  z-index: 999999;
+  --style-color: #000000;
+
+  @keyframes default-loader-rotation {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .load {
+    animation: default-loader-rotation 500ms linear 0ms infinite forwards;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    border-bottom: solid 2px var(--style-color);
+  }
+}

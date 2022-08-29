@@ -1,0 +1,63 @@
+* {
+	box-sizing: border-box;
+}
+body {
+	background: #f1f1f1;
+	margin: 2rem;
+}
+
+$color_white: #fff;
+$color_prime: #5ad67d;
+$color_grey: #e2e2e2;
+$color_grey_dark: #a2a2a2;
+
+.principal {
+  overflow: auto;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  header {
+    h1 {
+      font-size: 40px;
+      color: white;
+    }
+    background-color: #226e93;
+    padding: 40px 0;
+  }
+  .content {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 94%;
+  }
+  .scroll {
+    overflow: auto;
+    width: 100%;
+    flex: 1;
+}
+  .footer {
+    width: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    padding-top: 9px;
+    padding-bottom: 9px;
+    background-color: #226e93;
+    text-align: center;
+    color: black;
+    font-size: 13px;
+    color: white;
+  }
+}
+
+div {
+  user-select:text;
+}
+
+h1 {
+  user-select:text;
+}

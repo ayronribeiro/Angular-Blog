@@ -1,0 +1,34 @@
+<div class="container">
+  <header>
+    <div class="buttons">
+      <a *ngFor="let tab of tabs;let i = index" (click)="select(i)" [ngClass]="{active: i == selectedIndex}">
+        {{tab.title || 'Tab ' + (i + 1)}}
+      </a>
+    </div>
+
+    <div class="bar">
+      <div class="thumb"
+        [ngStyle]="{left: 0, width: 'calc(100%  / ' + tabs.length + ')', transform: 'translate(' + (100 * selectedIndex) + '%)'}">
+      </div>
+    </div>
+  </header>
+
+  <div class="content" [carousel]="{
+    selectedAttraction: 0.3,
+    friction: 0.8,
+    cellAlign: 'center',
+    pageDots: false,
+    prevNextButtons: false,
+    setGallerySize: false,
+    percentPosition: true,
+    contain: true,
+    freeScroll: false,
+    draggable: false
+  }">
+    <ng-content></ng-content>
+  </div>
+
+  <!-- <footer>
+    <div class="bar"></div>
+  </footer> -->
+</div>

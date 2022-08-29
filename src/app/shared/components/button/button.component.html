@@ -1,0 +1,7 @@
+<button [type]="type" [ngClass]="{loader: loader}" [disabled]="type == 'submit' ? (form ? !form.valid : true) : disabled" [attr.design]="design">
+  <div class="container">
+    <app-icon *ngIf="icon">{{icon}}</app-icon>
+    <p><ng-content></ng-content></p>
+    <app-loader *ngIf="loader"></app-loader>
+  </div>
+</button>

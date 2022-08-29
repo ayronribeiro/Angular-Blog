@@ -1,0 +1,1 @@
+export type RecursiveEventCancel = { (): any; on: (event: string, callback: (data: any) => void) => RecursiveEventCancel };

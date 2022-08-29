@@ -1,0 +1,5 @@
+<app-overlay [hash]="hash" (update)="$open.emit($event)" (close)="$close.emit()" [canClose]="canClose" #overlay>
+    <div class="container">
+      <ng-content></ng-content>
+    </div>
+</app-overlay>

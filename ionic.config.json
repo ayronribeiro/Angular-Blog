@@ -1,0 +1,7 @@
+{
+  "name": "DSA",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

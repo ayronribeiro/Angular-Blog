@@ -1,0 +1,19 @@
+:host {
+    display: none;
+}
+
+.container {
+    position: relative;
+    width: auto;
+    height: auto;
+    max-width: 80%;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    background-color: var(--color-3);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    overflow: hidden;
+    padding: calc(var(--size) * 0.25);
+}

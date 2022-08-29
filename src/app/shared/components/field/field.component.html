@@ -1,0 +1,273 @@
+<div class="field" [attr.design]="design">
+    <div class="label" *ngIf="label">{{label}}</div>
+    <div class="container"
+        [ngClass]="{focus: _focus, disabled: disabled || loader || block, empty: (value === undefined || value === '' || value === null) && type != 'slider'}"
+        [ngSwitch]="type">
+        <div class="data">
+            <div class="insider" *ngSwitchCase="'checkbox'" (click)="value = !value">
+                <div class="checkbox" [ngClass]="{checked: value}"></div>
+                <div class="outside" *ngIf="placeholder">{{placeholder}}</div>
+            </div>
+            <div class="content" *ngSwitchCase="'readonly'">
+                <div class="text">
+                    <input [disabled]="disabled || loader || block" #copyInput readonly class="value" [value]="value | imask:mask" type="text"
+                        (focus)="_focus = true" (blur)="_focus = false;pristine = false;blur.emit($event);" type="text"
+                        ngDefaultControl />
+                </div>
+                <div class="topline">
+                    <div class="placeholder" *ngIf="placeholder">
+                        <p>{{placeholder}}<span *ngIf="required">*</span></p>
+                    </div>
+                </div>
+                <div class="line" [ngClass]="{error: error && !pristine, ok: !error && value && !pristine, focus: _focus}"></div>
+                <div class="icon interactive" (click)="copy(copyInput)">
+                    <i class="clipboard"></i>
+                </div>
+            </div>
+            <div class="content" *ngSwitchCase="'date'">
+                <input [disabled]="disabled || loader || block" class="full-hidden" matInput [matDatepicker]="picker" [value]="value"
+                    (dateInput)="value = date($event.value)">
+                <mat-datepicker #picker></mat-datepicker>
+                <div class="text" (click)="picker.open()">
+                    <input [disabled]="disabled || loader || block" class="value" readonly [value]="value | date: 'dd/MM/yyyy'" [imask]="{mask: '00/00/0000'}"
+                        type="text" (focus)="_focus = true" (blur)="_focus = false;pristine = false;blur.emit($event);"
+                        ngDefaultControl />
+                </div>
+                <div class="topline">
+                    <div class="placeholder" *ngIf="placeholder">
+                        <p>{{placeholder}}<span *ngIf="required">*</span></p>
+                    </div>
+                </div>
+                <div class="line" [ngClass]="{error: error && !pristine, ok: !error && value && !pristine, focus: _focus}"></div>
+                <div class="icon interactive" (click)="picker.open()">
+                    <i class="calendar-day"></i>
+                </div>
+            </div>
+            <div class="content" *ngSwitchCase="'select'" (click)="select.open();">
+                <mat-select class="full-hidden bottom" [(ngModel)]="value" ngDefaultControl
+                    (openedChange)="setPristine($event);">
+                    <ng-container *ngFor="let option of options">
+                        <mat-option [value]="option.value">{{ (option.text?.toString() || '') | imask:mask }}
+                        </mat-option>
+                    </ng-container>
+                </mat-select>
+                <div class="text">
+                    <div class="value">{{ (text?.toString() || '') | imask:mask }}</div>
+                </div>
+                <div class="topline">
+                    <div class="placeholder" *ngIf="placeholder">
+                        <p>{{placeholder}}<span *ngIf="required">*</span></p>
+                    </div>
+                </div>
+                <div class="icon">
+                    <div class="select-icon"></div>
+                </div>
+            </div>
+            <div class="content" *ngSwitchCase="'color'">
+                <div class="text">
+                    <input [disabled]="disabled || loader || block" [readonly]="disabled" [(ngModel)]="value" class="value" type="text" (focus)="_focus = true"
+                        (blur)="_focus = false;pristine = false;blur.emit($event);" type="text" ngDefaultControl />
+                </div>
+                <div class="topline">
+                    <div class="placeholder" *ngIf="placeholder">
+                        <p>{{placeholder}}<span *ngIf="required">*</span></p>
+                    </div>
+                </div>
+                <div class="line" [ngClass]="{error: error && !pristine, ok: !error && value && !pristine, focus: _focus}"></div>
+                <div class="color" [ngStyle]="{background: value}">
+                    <input [disabled]="disabled || loader || block" [readonly]="disabled" type="color" [(ngModel)]="value" ngDefaultControl />
+                </div>
+            </div>
+            <div class="content" *ngSwitchCase="'javascript'">
+                <div class="text textarea">
+                    <ngx-codemirror class="extend" [(ngModel)]="value" (blur)="_focus = false;pristine = false;blur.emit($event);" ngDefaultControl (focus)="_focus = true" [options]="{
+                        lineNumbers: false,
+                        theme: 'platform',
+                        mode: 'javascript'
+                    }"
+                    ></ngx-codemirror>
+                </div>
+                <div class="topline">
+                    <div class="placeholder" *ngIf="placeholder">
+                        <p>{{placeholder}}<span *ngIf="required">*</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="content" *ngSwitchCase="'string'">
+                <div class="text textarea">
+                    <ngx-codemirror class="extend" [(ngModel)]="value" (blur)="_focus = false;pristine = false;blur.emit($event);" (focus)="_focus = true" [options]="{
+                        lineNumbers: false,
+                        theme: 'platform',
+                        mode: 'string'
+                    }"
+                    ></ngx-codemirror>
+                </div>
+                <div class="topline">
+                    <div class="placeholder" *ngIf="placeholder">
+                        <p>{{placeholder}}<span *ngIf="required">*</span></p>
+                    </div>
+                </div>
+                <div class="line" [ngClass]="{error: error && !pristine, ok: !error && value && !pristine, focus: _focus}"></div>
+            </div>
+            <div class="content" *ngSwitchCase="'javascript:expression'">
+                <div class="text textarea">
+                    <ngx-codemirror #expression [(ngModel)]="value" (blur)="_focus = false;pristine = false;blur.emit($event);" (focus)="_focus = true" [options]="{
+                        lineNumbers: false,
+                        theme: 'platform',
+                        mode: 'javascript'
+                    }"
+                    ></ngx-codemirror>
+                </div>
+                <div class="topline">
+                    <div class="placeholder" *ngIf="placeholder">
+                        <p>{{placeholder}}<span *ngIf="required">*</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="content" *ngSwitchCase="'string:expression'">
+                <div class="text textarea">
+                    <ngx-codemirror #expression [(ngModel)]="value" (blur)="_focus = false;pristine = false;blur.emit($event);" ngDefaultControl (focus)="_focus = true" [options]="{
+                        lineNumbers: false,
+                        theme: 'platform',
+                        mode: 'string'
+                    }"
+                    ></ngx-codemirror>
+                </div>
+                <div class="topline">
+                    <div class="placeholder" *ngIf="placeholder">
+                        <p>{{placeholder}}<span *ngIf="required">*</span></p>
+                    </div>
+                </div>
+                <div class="line" [ngClass]="{error: error && !pristine, ok: !error && value && !pristine, focus: _focus}"></div>
+            </div>
+            <div class="content" *ngSwitchCase="'text'">
+                <div class="text textarea">
+                    <textarea class="extend" [imask]="mask" [(ngModel)]="value" [unmask]="true" [readonly]="disabled" type="text"
+                        (focus)="_focus = true" (blur)="_focus = false;pristine = false;blur.emit($event);"
+                        ngDefaultControl></textarea>
+                </div>
+                <div class="topline">
+                    <div class="placeholder" *ngIf="placeholder">
+                        <p>{{placeholder}}<span *ngIf="required">*</span></p>
+                    </div>
+                </div>
+                <div class="line" [ngClass]="{error: error && !pristine, ok: !error && value && !pristine, focus: _focus}"></div>
+
+            </div>
+            <div class="file" *ngSwitchCase="'file'">
+                <input [disabled]="disabled || loader || block" type="file" #fileInput (change)="setFile($event)" />
+                <div class="preview">
+                    <app-icon *ngIf="value">files</app-icon>
+                </div>
+                <div class="file_content">
+                    <p class="placeholder">{{placeholder}}</p>
+                    <div class="down">
+                        <app-button class="active" type="button" *ngIf="!value" (click)="fileInput.click()">adicionar
+                        </app-button>
+                        <app-button type="button" *ngIf="value" (click)="fileInput.value = null;value = null;">remover
+                        </app-button>
+                        <p class="bytes" *ngIf="value">{{value.size | bytes}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="file" *ngSwitchCase="'image'">
+                <input [disabled]="disabled || loader || block" type="file" #fileInput (change)="setFile($event)" />
+                <div class="preview">
+                    <img *ngIf="url(value)" [src]="url(value) | safe"/>
+                </div>
+                <div class="file_content">
+                    <p class="placeholder">{{placeholder}}</p>
+                    <div class="down">
+                        <app-button class="active" type="button" *ngIf="!value" (click)="fileInput.click()">adicionar
+                        </app-button>
+                        <app-button type="button" *ngIf="value" (click)="fileInput.value = null;value = null;">remover
+                        </app-button>
+                    </div>
+                </div>
+            </div>
+            <div class="content" *ngSwitchCase="'hidden'"></div>
+            <div class="content" *ngSwitchCase="'password'">
+                <div class="text">
+                    <input [disabled]="disabled || loader || block" [imask]="mask" [(ngModel)]="value" [unmask]="true" [readonly]="disabled"
+                        (focus)="_focus = true" (blur)="_focus = false;pristine = false;blur.emit($event);"
+                        [type]="hidePassword ? 'password' : 'text'" ngDefaultControl />
+                </div>
+                <div class="topline">
+                    <div class="placeholder" *ngIf="placeholder">
+                        <p>{{placeholder}}<span *ngIf="required">*</span></p>
+                    </div>
+                </div>
+                <div class="line" [ngClass]="{error: error && !pristine, ok: !error && value && !pristine, focus: _focus}"></div>
+                <div class="icon" (click)="hidePassword = !hidePassword">
+                    <i class="eye-slash" *ngIf="hidePassword"></i>
+                    <i class="eye" *ngIf="!hidePassword"></i>
+                </div>
+            </div>
+
+            <div class="content" *ngSwitchCase="'slider'">
+                <div class="text">
+                    <div class="slider">
+                        <div class="bar" #bar>
+                            <span #slider (mousedown)="startGrab($event, bar)"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="topline">
+                    <div class="placeholder" *ngIf="placeholder">
+                        <p>{{placeholder}}<span *ngIf="required">*</span></p>
+                    </div>
+                </div>
+                <div class="line" [ngClass]="{error: error && !pristine, ok: !error && value && !pristine, focus: _focus}"></div>
+            </div>
+            <div class="content" *ngSwitchCase="'number'">
+              <div class="text">
+                  <input [disabled]="disabled || loader || block" [imask]="mask" [value]="value ? value.toString() : 0" #numberInput (input)="this.value = numberInput.value" [unmask]="true" [readonly]="disabled"
+                      (focus)="_focus = true" (blur)="_focus = false;pristine = false;blur.emit($event);" type="text"
+                      ngDefaultControl />
+              </div>
+              <div class="topline">
+                  <div class="placeholder" *ngIf="placeholder">
+                      <p>{{placeholder}}<span *ngIf="required">*</span></p>
+                  </div>
+              </div>
+              <div class="line" [ngClass]="{error: error && !pristine, ok: !error && value && !pristine, focus: _focus}"></div>
+          </div>
+            <div class="content" *ngSwitchDefault>
+                <div class="text">
+                    <input [disabled]="disabled || loader || block" [imask]="mask" [(ngModel)]="value" [unmask]="true" [readonly]="disabled"
+                        (focus)="_focus = true" (blur)="_focus = false;pristine = false;blur.emit($event);" type="text"
+                        ngDefaultControl />
+                </div>
+                <div class="topline">
+                    <div class="placeholder" *ngIf="placeholder">
+                        <p>{{placeholder}}<span *ngIf="required">*</span></p>
+                    </div>
+                </div>
+                <div class="line" [ngClass]="{error: error && !pristine, ok: !error && value && !pristine, focus: _focus}"></div>
+            </div>
+
+            <div class="loader" *ngIf="loader">
+                <app-loader></app-loader>
+            </div>
+
+            <!-- <div class="error_icon" *ngIf="error && !pristine" [ngSwitch]="error">
+                <app-icon *ngSwitchCase="'required'" tooltip.title="Campo obrigatório">alert</app-icon>
+                <app-icon *ngSwitchCase="'invalid'" tooltip.title="Campo inválido">alert</app-icon>
+                <app-icon *ngSwitchCase="'max:file'" tooltip.title="Arquivo pode ter no máximo: {{ max | bytes }}">alert</app-icon>
+                <app-icon *ngSwitchCase="'min:file'" tooltip.title="Arquivo pode ter no mínimo: {{ min | bytes }}">alert</app-icon>
+                <app-icon *ngSwitchCase="'max:date'"
+                    tooltip.title="A data tem que ser antes de: {{ max | date: 'dd/MM/yyyy - hh:mm' }}">alert</app-icon>
+                <app-icon *ngSwitchCase="'min:date'" tooltip.title="A data tem que ser depois de: {{ min | date: 'dd/MM/yyyy - hh:mm' }}">alert</app-icon>
+                <app-icon *ngSwitchCase="'max:number'" tooltip.title="O número precisa ser no máximo: {{ max }}">alert</app-icon>
+                <app-icon *ngSwitchCase="'min:number'" tooltip.title="O número precisa ser no mínimo: {{ min }}">alert</app-icon>
+                <app-icon *ngSwitchCase="'max:string'" tooltip.title="O texto precisa ter no máximo: {{ max }} caracteres">alert</app-icon>
+                <app-icon *ngSwitchCase="'min:string'" tooltip.title="O texto precisa ter no mínimo: {{ min }} caracteres">alert</app-icon>
+            </div> -->
+
+        </div>
+
+        <div class="description" *ngIf="description">{{description}}</div>
+    </div>
+
+
+</div>

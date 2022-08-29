@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="alert" [ngClass]="type" *ngIf="active">
+    <!-- <div class="icon" [ngSwitch]="type">
+      <i class="check-circle" *ngSwitchCase="'success'"></i>
+      <i class="exclamation-circle" *ngSwitchCase="'danger'"></i>
+      <i class="exclamation-triangle" *ngSwitchCase="'warning'"></i>
+    </div> -->
+    <div class="text">
+      <p class="title">{{title}}</p>
+      <p class="description">{{description}}</p>
+    </div>
+  </div>
+</div>
+
+
+

@@ -1,0 +1,30 @@
+{
+  "root": true,
+  "ignorePatterns": ["projects/**/*"],
+  "overrides": [
+    {
+      "files": ["*.ts"],
+      "parserOptions": {
+        "project": ["tsconfig.json", "e2e/tsconfig.json"],
+        "createDefaultProgram": true
+      },
+      "extends": [
+
+      ],
+      "rules": {
+        "curly":"off",
+        "eqeqeq":"off",
+        "max-len": 0
+      }
+    },
+    {
+      "files": ["*.html"],
+      "extends": [],
+      "rules": {
+        "curly":"off",
+        "eqeqeq":"off",
+        "max-len": 0
+      }
+    }
+  ]
+}

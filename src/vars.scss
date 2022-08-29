@@ -1,0 +1,23 @@
+body {
+  --size: 100px;
+  --box-shadow: rgb(0 0 0 / 20%) 0px 3px 1px -2px, rgb(0 0 0 / 14%) 0px 2px 2px 0px, rgb(0 0 0 / 12%) 0px 1px 5px 0px;
+  --border-radius: 4px;
+  --color-1: #1d1f28;
+  --color-2: #ccb5a2;
+  --color-3: #ffffff;
+  --animation-speed: 150ms;
+
+  --color-success: #28a745;
+  --color-info: #1b6dff;
+  --color-warning: #ffc107;
+  --color-danger: #dc3545;
+  --color-light: #f8f9fa;
+  --color-dark: #18181a;
+}
+
+
+@media (max-width: 767px) {
+  body {
+    --size: 83px;
+  }
+}
